@@ -1,0 +1,14 @@
+To runtests in this directory, the following steps are needed.
+1) Run "xmd" from another window on the same host, upon initialization, type "mbc sim";
+2) Run "make check" from <build_dir>/gdb/
+
+
+Note, currently only tests in following dirs are ran
+
+gdb.asm
+gdb.base
+gdb.c++
+gdb.disasm
+gdb.java
+gdb.threads
+gdb.trace

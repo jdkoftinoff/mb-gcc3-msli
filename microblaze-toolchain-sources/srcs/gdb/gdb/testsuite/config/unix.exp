@@ -1,0 +1,17 @@
+
+## Navanee- Based on gdbserver.exp
+
+load_lib ../config/monitor.exp
+
+set_board_info gdb_protocol "remote"
+set_board_info use_gdb_stub 1
+set_board_info gdb,do_reload_on_run 1
+set_board_info noargs 1
+set_board_info gdb,noinferiorio 1
+set_board_info gdb,no_hardware_watchpoints 1
+set_board_info gdb_server_prog "echo Hello"
+set_board_info sockethost localhost
+set_board_info socketport 1234
+set_board_info netport "localhost:1234"
+
+## puts [info body remote_reboot]

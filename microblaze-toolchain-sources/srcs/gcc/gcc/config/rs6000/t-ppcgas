@@ -1,0 +1,18 @@
+# Multilibs for powerpc embedded ELF targets.
+
+#MULTILIB_OPTIONS	= msoft-float \
+#			  mlittle/mbig \
+#			  fleading-underscore
+
+#MULTILIB_DIRNAMES	= nof \
+#			  le be \
+#			  und
+
+#MULTILIB_EXTRA_OPTS	= mrelocatable-lib mno-eabi mstrict-align
+
+#MULTILIB_MATCHES	= ${MULTILIB_MATCHES_FLOAT} \
+#			  ${MULTILIB_MATCHES_ENDIAN}
+
+MULTILIB_OPTIONS = mfpu=sp_lite/mfpu=dp_lite mv4fxtuning
+MULTILIB_DIRNAMES = fpu_sp fpu_dp v4fxtuning
+MULTILIB_MATCHES = mfpu?sp_lite=mfpu?sp_full mfpu?dp_lite=mfpu?dp_full

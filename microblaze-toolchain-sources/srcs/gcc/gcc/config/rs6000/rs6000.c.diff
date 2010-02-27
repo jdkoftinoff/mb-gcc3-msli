@@ -1,0 +1,26 @@
+===================================================================
+RCS file: /cvs/gcc/gcc/gcc/config/rs6000/rs6000.c,v
+retrieving revision 1.755
+retrieving revision 1.756
+diff -u -r1.755 -r1.756
+--- gcc/gcc/config/rs6000/rs6000.c	2004/11/27 22:45:23	1.755
++++ gcc/gcc/config/rs6000/rs6000.c	2004/11/27 22:51:43	1.756
+@@ -17263,6 +17263,18 @@
+   if (rs6000_sdata == SDATA_NONE)
+     return false;
+ 
++  /* We want to merge strings, so we never consider them small data.  */
++  if (TREE_CODE (decl) == STRING_CST)
++    return false;
++
++  /* Functions are never in the small data area.  */
++  if (TREE_CODE (decl) == FUNCTION_DECL)
++    return false;
++
++  /* Thread-local vars can't go in the small data area.  */
++  if (TREE_CODE (decl) == VAR_DECL && DECL_THREAD_LOCAL (decl))
++    return false;
++
+   if (TREE_CODE (decl) == VAR_DECL && DECL_SECTION_NAME (decl))
+     {
+       const char *section = TREE_STRING_POINTER (DECL_SECTION_NAME (decl));

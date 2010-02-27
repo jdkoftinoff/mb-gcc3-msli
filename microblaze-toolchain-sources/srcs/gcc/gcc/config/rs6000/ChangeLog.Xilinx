@@ -1,0 +1,53 @@
+/*----------------------------------------------------------------------------------------
+        Xilinx RS6000 ChangeLog
+        $Id: ChangeLog.Xilinx,v 1.2 2005/07/01 03:35:15 vasanth Exp $
+
+        (There could still be stuff that we did, that has not been documented here -- Vasanth)
+
+ -----------------------------------------------------------------------------------------*/
+
+(EDK_Halite)
+
+        rs6000.c.diff  
+
+        o  Fix for CR that caused function references to be performed as a small-data access.
+        
+        rs6000.c.diff2 
+
+        o  Fix for CR 203504.
+
+        V4FxTuning Changes 
+
+        o  Include new switch -mv4fxtuning for nop insertion workaround for PPC v4 fx early access devices.
+        o  Pass down switch to assembler using ASM_SPEC
+        o  Run Multilibs on -mv4fxtuning
+
+(EDK_Iron)
+
+        Qinetiq APU FPU Changes  
+
+        o  Add new -mfpu switch
+        o  Enable TARGET_HARD_FLOAT only if -mfpu is given
+        o  Enable double floats only on the dp_* switches to -mfpu
+           o This applies to primitives generated from MD file as well as code production systems in .c file
+        o  According to the compiler, FPRs are only 32-bits wide on a single precision FPU (as against constant 64-bits assumed by PPC E-book spec)        
+        o  Remove hard-coded 8's and change to UNITS_PER_FP_WORD (or 8/4), since this now depends on FPU single/double selection
+        o  Change hard-coded DFmode's to DFmode/SFmode based on FPU mode
+        o  A few other hacks to prevent SImode params from moving into FP registers
+        o  Run Multilibs on all FPU switch combinations
+                o  ?? Removal of some combinations using MULTILIB_MATCHES ??
+        o  Bug in 405 hardware; All FPU compare instructions will write only to CR1. Hence change register allocation for CR registers for FP Compares to use only CR1
+        o  Added a new instruction attribute "fp_type", as a sub type. Using this attribute across most floating point instructions.
+        o  Added a machine model for the Xilinx FPU. (xfpu.md)
+        o  Modified 40x.md to make default reservation for instruction type "float", to be used only if FPU_TYPE is DEFAULT. If FPU_TYPE is not default,
+           the reservations in xfpu.md is used.
+        o  Other TARGET_SCHED_ hooks modified... ??
+        o  Changed startfile_default and endfile_default to include crt*files and 4 variants of crt0 (xil-crt0, xil-sim-crt0, xil-pgcrt0, xilsim-pgcrt0).
+           These new files are now released with the compiler.
+               -- The CRTs also have a conditional code that is multilibed on the -mfpu flags. This code sets up the MSR bit correctly.
+        o  -mno-clearbss switch added. Turns off flag_zero_initialized_in_bss in override_options to 0. Uses sim-* crt files (above) in startfile_spec.
+        o  Changed eabi.S. Added #if 0s for code that we don't want and added _RELOCATABLE for certain other sections that are needed only if relocatable.
+        o  Added CRT_CALL_STATIC_FUNCTION to sysv4.h to minimize unwanted call_FUNC wrappers in crtstuff.c.
+        
+
+        

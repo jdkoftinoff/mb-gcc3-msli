@@ -1,0 +1,23 @@
+#!/usr/local/bin/tcsh -evf
+if ($1 == "SOLARIS" || $1 == "" || $1 == "sol") then
+  setenv PROJ_EDK /proj/embedded
+else
+  setenv PROJ_EDK /cygdrive/h/proj_embedded
+endif
+
+setenv SRCDIR ${EDK_ENV}/sw/ThirdParty/gnu/src/genromfs
+setenv DSTDIR ${GNU_SOURCES_DIR}/mb/srcs/genromfs
+
+## Create the Source Directory
+if (-e ${DSTDIR}) then
+ \rm -rf ${DSTDIR}
+endif
+mkdir -p ${DSTDIR}
+
+echo "Source directory is ${SRCDIR}"
+echo "Dest directory is ${DSTDIR}"
+\cp -R ${SRCDIR}/*  ${DSTDIR}/
+cd ${DSTDIR}
+chmod -R 755 *
+remove-xcs
+cd -
