@@ -143,6 +143,8 @@ boolean	coff_write_armap PARAMS ((bfd *arch, unsigned int elength,
 
 extern PTR _bfd_generic_read_ar_hdr PARAMS ((bfd *));
 
+extern void _bfd_ar_spacepad (char *, size_t, const char *, long);
+
 extern PTR _bfd_generic_read_ar_hdr_mag PARAMS ((bfd *, const char *));
 
 bfd *	bfd_generic_openr_next_archived_file PARAMS ((bfd *archive,
