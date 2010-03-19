@@ -97,6 +97,21 @@ R_RODAT		*(.rodata.*)
 		LONG(0)
 		__DTOR_END__ = .;
 
+		PROVIDE(__preinit_array_start = .);
+		KEEP(*(SORT(.preinit_array.*)));
+		KEEP(*(.preinit_array));
+		PROVIDE(__preinit_array_end = .);	
+
+		PROVIDE(__init_array_start = .);
+		KEEP(*(SORT(.init_array.*)));
+		KEEP(*(.init_array));
+		PROVIDE(__init_array_end = .);	
+
+		PROVIDE(__fini_array_start = .);
+		KEEP(*(SORT(.fini_array.*)));
+		KEEP(*(.fini_array));
+		PROVIDE(__fini_array_end = .);	
+
 		. = ALIGN(0x10) ; 
 		_edata = . ;
 	} > flatmem
