@@ -47,13 +47,13 @@ ${TMP_ELF2FLT_SRC}/configure --target=microblaze --prefix=${RELDIR} \
         --with-bfd-include-dir=${RELDIR}/include \
         --with-binutils-include-dir=${TMP_ELF2FLT_SRC}/
 
-make all 
-make install
+make all CC="gcc -m32" CXX="g++ -m32"
+make install CC="gcc -m32" CXX="g++ -m32"
 
 ## Build genromfs next
 cd ${TMP_GENROMFS_SRC}
 make clean
-make
+make CC="gcc -m32" CXX="g++ -m32"
 cp -r ${TMP_GENROMFS_SRC}/genromfs${EXT} ${RELDIR}/bin/genromfs${EXT}
 cd ${CURDIR}
 

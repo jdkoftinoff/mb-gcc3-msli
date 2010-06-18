@@ -25,8 +25,8 @@ chmod -R 755 ${GDB_SRC_DIR}
 # do uclinux mb-uclinux-gdb first
 cd ${BLDDIR}
 ${GDB_SRC_DIR}/configure -srcdir=${GDB_SRC_DIR} -target=microblaze -prefix=${RELDIR} -program-prefix="mb-uclinux-" -enable-threads
-gmake all CFLAGS='-O2 -DMICROBLAZE -D__MICROBLAZE_UCLINUX__ -DMICROBLAZE_DEBUG'
-gmake install
+gmake all CC="gcc -m32" CXX="g++ -m32" CFLAGS='-O2 -DMICROBLAZE -D__MICROBLAZE_UCLINUX__ -DMICROBLAZE_DEBUG -fPIC'
+gmake install CC="gcc -m32" CXX="g++ -m32"
 
 # Rename executables to add -user suffix
 cd ${RELDIR}/bin/
@@ -47,8 +47,8 @@ mkdir -p ${BLDDIR}
 cd ${BLDDIR}
 ${GDB_SRC_DIR}/configure -srcdir=${GDB_SRC_DIR} -target=microblaze -prefix=${RELDIR} -program-prefix="mb-" 
 # To build for uclinux platform, add '-D__MICROBLAZE_UCLINUX__' to CFLAGS below
-gmake all CFLAGS='-O2 -DMICROBLAZE' 
-gmake install
+gmake all CC="gcc -m32" CXX="g++ -m32" CFLAGS='-O2 -DMICROBLAZE -fPIC' 
+gmake install CC="gcc -m32" CXX="g++ -m32"
     
 cd ${RELDIR}/bin/
 mv mb-insight${EXT} mb-gdb${EXT}

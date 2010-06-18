@@ -26,9 +26,9 @@ cd ${BLDDIR}
 ## OPTIMIZE_FOR_LOW_MEMORY  --  To prevent verbose termination handler
 ## _NEWLIB_VERSION          --  To prevent testsuite from invoking mkfifo
 ${GCC_SRC_DIR}/configure --srcdir=${GCC_SRC_DIR} --target=microblaze  --prefix=${RELDIR} --program-prefix="mb-" --nfp  -v --enable-languages="c++" --with-newlib --with-headers --enable-multilib --enable-cxx-flags="-DOPTIMIZE_FOR_LOW_MEMORY -D_NEWLIB_VERSION"
-make all CFLAGS="-O2 -DMICROBLAZE -DEDK" CXXFLAGS="-O2 -DMICROBLAZE -DEDK"
+make all CC="gcc -m32" CXX="g++ -m32" CFLAGS="-O2 -DMICROBLAZE -DEDK -g" CXXFLAGS="-O2 -DMICROBLAZE -DEDK -g"
 echo "make install"
-make install CFLAGS="-O2 -DMICROBLAZE -DEDK" CXXFLAGS="-O2 -DMICROBLAZE -DEDK"
+make install CC="gcc -m32" CXX="g++ -m32" CFLAGS="-O2 -DMICROBLAZE -DEDK -g" CXXFLAGS="-O2 -DMICROBLAZE -DEDK -g"
 cd ${BIN_DIR}
 
 # if ( -e microblaze-gcc${EXT} ) then
